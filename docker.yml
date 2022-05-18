@@ -41,6 +41,7 @@ services:
       SEARCH_TYPE: database
 
 
+
     networks:
      - db
     restart: unless-stopped
