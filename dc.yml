@@ -20,7 +20,6 @@ fusionauth1:
     image: fusionauth/fusionauth-app:latest
     depends_on:
       - db
-      - search
     environment:
       DATABASE_URL: jdbc:postgresql://db:5432/fusionauth
       DATABASE_ROOT_USER: ${POSTGRES_USER}
@@ -42,7 +41,6 @@ fusionauth2:
     image: fusionauth/fusionauth-app:latest
     depends_on:
       - db
-      - search
     environment:
       DATABASE_URL: jdbc:postgresql://db:5432/fusionauth
       DATABASE_ROOT_USER: ${POSTGRES_USER}
