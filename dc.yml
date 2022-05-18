@@ -45,7 +45,7 @@ services:
      - db
     restart: unless-stopped
     ports:
-      - 9011:9011
+      - 9012:9011
     volumes:
       - fa_config:/usr/local/fusionauth/config
 
