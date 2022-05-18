@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3'
 
 services:
   db:
@@ -40,6 +40,7 @@ services:
       FUSIONAUTH_APP_URL: http://fusionauth:9011
       SEARCH_TYPE: database
 
+
     networks:
      - db
     restart: unless-stopped
@@ -47,30 +48,7 @@ services:
       - 9011:9011
     volumes:
       - fa_config:/usr/local/fusionauth/config
-  fusionauth2:
-    image: fusionauth/fusionauth-app:latest
-    depends_on:
-      - db
-      - search
-    environment:
-      DATABASE_URL: jdbc:postgresql://db:5432/fusionauth
-      DATABASE_ROOT_USER: ${POSTGRES_USER}
-      DATABASE_ROOT_PASSWORD: ${POSTGRES_PASSWORD}
-      DATABASE_USER: ${DATABASE_USER}
-      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
-      FUSIONAUTH_MEMORY: ${FUSIONAUTH_MEMORY}
-      FUSIONAUTH_SEARCH_SERVERS: http://search:9200
-      FUSIONAUTH_URL: fusionauth2:9011
-    networks:
-     - db
-     - search
-    restart: unless-stopped
-    ports:
-      - 9011:9011
-    volumes:
-      - fa_config:/usr/local/fusionauth/config
-      
-      
+
 networks:
   db:
     driver: bridge
