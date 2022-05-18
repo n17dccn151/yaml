@@ -32,7 +32,6 @@ fusionauth1:
       FUSIONAUTH_URL: fusionauth1:9011
     networks:
      - db
-     - search
     restart: unless-stopped
     ports:
       - 9011:9011
@@ -55,7 +54,6 @@ fusionauth2:
       FUSIONAUTH_URL: fusionauth2:9011
     networks:
      - db
-     - search
     restart: unless-stopped
     ports:
       - 9011:9011
