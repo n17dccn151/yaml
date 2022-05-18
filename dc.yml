@@ -1,3 +1,21 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:12.9
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    # Un-comment to access the db service directly
+#   ports:
+#     - 5432:5432
+    networks:
+      - db
+    restart: unless-stopped
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
 fusionauth1:
     image: fusionauth/fusionauth-app:latest
     depends_on:
@@ -43,3 +61,12 @@ fusionauth2:
       - 9011:9011
     volumes:
       - fa_config:/usr/local/fusionauth/config
+
+networks:
+  db:
+    driver: bridge
+
+volumes:
+  db_data:
+  fa_config:
+
