@@ -16,7 +16,7 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
 
-  fusionauth1:
+  fusionauth:
     image: fusionauth/fusionauth-app:latest
     depends_on:
       - db
@@ -32,21 +32,20 @@ services:
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       # Prior to version 1.19.0, use this deprecated names
       # FUSIONAUTH_MEMORY: ${FUSIONAUTH_MEMORY}
-      # FUSIONAUTH_SEARCH_ENGINE_TYPE: database
+      FUSIONAUTH_SEARCH_ENGINE_TYPE: elasticsearch
       # FUSIONAUTH_URL: http://fusionauth:9011
       # FUSIONAUTH_RUNTIME_MODE: development
       FUSIONAUTH_APP_MEMORY: ${FUSIONAUTH_APP_MEMORY}
       FUSIONAUTH_APP_RUNTIME_MODE: development
-      FUSIONAUTH_APP_URL: http://fusionauth1:9012
-      SEARCH_TYPE: database
-
+      FUSIONAUTH_APP_URL: http://fusionauth:9011
+      SEARCH_TYPE: elasticsearch
 
 
     networks:
      - db
     restart: unless-stopped
     ports:
-      - 9012:9012
+      - 9011:9011
     volumes:
       - fa_config:/usr/local/fusionauth/config
 
