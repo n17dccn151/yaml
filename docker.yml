@@ -7,9 +7,8 @@ services:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-# Un-comment to access the db service directly
-#    ports:
-#      - 5432:5432
+    ports:
+      - 5432:5432
     networks:
       - db
     restart: unless-stopped
@@ -19,13 +18,12 @@ services:
   search:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.3.1
     environment:
-      - cluster.name=fusionauth
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=${ES_JAVA_OPTS}"
-# Un-comment to access the search service directly
-#    ports:
-#      - 9200:9200
-#      - 9300:9300
+      cluster.name: fusionauth
+      bootstrap.memory_lock: "true"
+      ES_JAVA_OPTS: "${ES_JAVA_OPTS}"
+    ports:
+    - 9200:9200
+    - 9300:9300
     networks:
       - search
     restart: unless-stopped
@@ -58,10 +56,6 @@ services:
       - 9011:9011
     volumes:
       - fa_config:/usr/local/fusionauth/config
-  mongo:
-    image: mongo
-    ports:
-      - 27017:27017
 
 networks:
   db:
